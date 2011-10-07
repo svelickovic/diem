@@ -37,12 +37,18 @@ class dmFrontHelperExtension
    * @return (string) the HTML produced by the widget
    */
   protected function getWidget($module, $action, array $params = array())
-  {
+  {    
+    $behaviors = null;
+    if (isset($params['behaviors'])) {
+        $behaviors = json_encode($params['behaviors']);
+        unset ($params['behaviors']);
+    }
     return $this->serviceContainer->getService('page_helper')->renderWidget(array(
       'module'    => $module,
       'action'    => $action,
       'value'     => json_encode($params),
-      'css_class' => dmArray::get($params, 'css_class')
+      'css_class' => dmArray::get($params, 'css_class'),
+      'behaviors' => $behaviors
     ));
   }
 }
