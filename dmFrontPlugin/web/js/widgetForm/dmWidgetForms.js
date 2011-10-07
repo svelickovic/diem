@@ -30,6 +30,8 @@ $.fn.extend({
   {
     var $form = this.find('form:first');
 
+    $form.find('div.dm_tabbed_form').dmCoreTabForm({});
+
     this.dmWidgetContentBaseMediaForm(widget, {
       accept: '#dm_media_bar li.file.image'
     });

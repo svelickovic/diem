@@ -10,12 +10,13 @@ _tag('ul.tabs',
   _tag('li', _link('#'.$baseTabId.'_text')->text(__('Text'))).
   _tag('li', _link('#'.$baseTabId.'_media')->text(__('Media'))).
   _tag('li', _link('#'.$baseTabId.'_links')->text(__('Links'))).
-  _tag('li', _link('#'.$baseTabId.'_advanced')->text(__('Presentation')))
+  _tag('li', _link('#'.$baseTabId.'_advanced')->text(__('Advanced')))
 ),
 
 _tag('div#'.$baseTabId.'_text',
   _tag('ul.dm_form_elements',
-    $form['title']->renderRow().
+    $form['title']->renderRow().    
+    $form['titlePosition']->renderRow().
     $form['text']->render(array('class' => 'dm_markdown'))
   )
 ),
@@ -45,8 +46,8 @@ _tag('div#'.$baseTabId.'_links',
 
 _tag('div#'.$baseTabId.'_advanced',
   _tag('ul.dm_form_elements',
-    $form['cssClass']->renderRow().
-    $form['titlePosition']->renderRow()
+    $form['behaviors']->renderRow().
+    $form['cssClass']->renderRow()
   )
 ),
 

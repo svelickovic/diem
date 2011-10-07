@@ -80,8 +80,9 @@ class dmWidgetContentImageForm extends dmWidgetContentBaseMediaForm
 
   protected function renderContent($attributes)
   {
-    return $this->getHelper()->renderPartial('dmWidget', 'forms/dmWidgetContentImage', array(
+    return $this->getHelper()->renderPartial('dmWidget', 'forms/dmWidgetContentImageAdvanced', array(
       'form' => $this,
+      'baseTabId' => 'dm_widget_image_'.$this->dmWidget->get('id'),
       'hasMedia' => (boolean) $this->getValueOrDefault('mediaId')
     ));
   }
@@ -121,4 +122,20 @@ class dmWidgetContentImageForm extends dmWidgetContentBaseMediaForm
 
     return $values;
   }
+  
+  public function getStylesheets()
+  {
+    return array_merge(parent::getStylesheets(), array(
+      'lib.ui-tabs',
+    ));
+  }
+
+  public function getJavascripts()
+  {
+    return array_merge(parent::getJavaScripts(), array(
+      'lib.ui-tabs',
+      'core.tabForm',
+    ));
+  }
+  
 }

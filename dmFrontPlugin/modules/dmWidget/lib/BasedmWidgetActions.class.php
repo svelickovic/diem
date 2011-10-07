@@ -213,15 +213,15 @@ class BasedmWidgetActions extends dmFrontBaseActions
   public function executeGetFull(sfWebRequest $request)
   {
     $widgetArray = $this->requireWidget()->toArrayWithMappedValue();
-
+    $html = '';
     try
     {
       $widgetRenderer = $this->getServiceContainer()
       ->setParameter('widget_renderer.widget', $widgetArray)
       ->getService('widget_renderer');
-      $js  = $widgetRenderer->getJavascripts();
-      $css = $widgetRenderer->getStylesheets();
       $html = $this->getService('page_helper')->renderWidget($widgetArray);
+      $js  = $widgetRenderer->getJavascripts();
+      $css = $widgetRenderer->getStylesheets();      
     }
     catch(Exception $e)
     {

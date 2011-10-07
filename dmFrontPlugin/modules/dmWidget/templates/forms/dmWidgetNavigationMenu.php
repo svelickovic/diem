@@ -8,6 +8,7 @@ _open('div.dm_tabbed_form'),
 
 _tag('ul.tabs',
   _tag('li', _link('#'.$baseTabId.'_items')->text(__('Items'))).
+  _tag('li', _link('#'.$baseTabId.'_settings')->text(__('Settings'))).
   _tag('li', _link('#'.$baseTabId.'_advanced')->text(__('Advanced')))
 ),
 
@@ -32,13 +33,19 @@ _tag('div#'.$baseTabId.'_items.drop_zone',
   )
 ),
 
-_tag('div#'.$baseTabId.'_advanced',
+_tag('div#'.$baseTabId.'_settings',
   _tag('ul.dm_form_elements',
-    $form['cssClass']->renderRow().
     $form['ulClass']->renderRow().
     $form['menuName']->renderRow().
-    $form['liClass']->renderRow().
+    $form['liClass']->renderRow().    
     (isset($form['menuClass']) ? $form['menuClass']->renderRow() : '')
+  )
+),
+        
+_tag('div#'.$baseTabId.'_advanced',
+  _tag('ul.dm_form_elements',
+    $form['behaviors']->renderRow().
+    $form['cssClass']->renderRow()    
   )
 ),
 
