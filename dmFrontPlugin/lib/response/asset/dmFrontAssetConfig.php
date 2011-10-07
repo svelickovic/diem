@@ -26,7 +26,8 @@ class dmFrontAssetConfig extends dmAssetConfig
         'front.toolBar',
         'front.zone',
         'front.widget',
-        'front.form'
+        'front.form',
+        'front.behaviorsToolBar'
       );
     }
     
@@ -77,7 +78,8 @@ class dmFrontAssetConfig extends dmAssetConfig
         'front.area',
         'front.zone',
         'front.widget',
-        'front.widgetForms'
+        'front.widgetForms',
+        'front.behaviorsToolBar'
       );
     }
     

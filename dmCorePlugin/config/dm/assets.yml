@@ -66,6 +66,7 @@ js:
     jeditable:        jeditable/jquery.jeditable.min
     colorbox:         colorbox/jquery.colorbox.min
     max-z-index:      maxzindex/jquery.maxzindex
+    json:             json/json.min
 
 css:
 
