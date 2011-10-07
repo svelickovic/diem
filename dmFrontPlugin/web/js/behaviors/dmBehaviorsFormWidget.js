@@ -1,8 +1,17 @@
 (function($) {
     var counter = 0;
+    var messages = {
+        add_behavior: 'Attach behavior',
+        edit_behavior: 'Edit behavior',
+        remove_behavior: 'Do you realy want to remove this behavior?'
+    };
     var methods = {
-        init: function() {
+        init: function() {            
             var self = $(this);
+            messages.add_behavior = self.find('.message_add_behavior').text();
+            messages.edit_behavior = self.find('.message_edit_behavior').text();
+            messages.remove_behavior = self.find('.message_remove_behavior').text();
+            self.find('.message').remove();
             $(this).data('behaviors', {}).droppable({
                 accept      :       '.dm_behavior_draggable_helper',
                 activeClass :       'droppable_active',
@@ -10,7 +19,7 @@
                 tolerance   :       'touch',
                 drop        :       function(event, ui) {
                     var $icon = $('.dm_behavior_draggable', $(ui.draggable));
-                    methods['openForm'].apply(self, [$icon.prop('id'), 'add']);
+                    methods['openForm'].apply(self, [$icon.prop('id'), 'add', null, $icon.find('.dm_behavior_draggable_title').text()]);
                 }
             });
         },
@@ -28,8 +37,7 @@
                         <div class="dm_behavior_draggable_title">' + behaviorData.dmBehaviorName + '</div> \
                     </div> \
                 </div>');
-            self.append($newBehavior);
-            
+            self.append($newBehavior);            
             $newBehavior.data('behavior', behaviorData).hover(function(){
                 $(this).addClass('dm_behavior_draggable_hover');
             }, function(){
@@ -42,9 +50,9 @@
             self.dmBehaviorsFormWidget('serializeBehaviors');
             $('.dm_remove_behavior_thick', $newBehavior).click(function(event){
                 event.stopPropagation();
-                if (confirm('Do you realy want to remove this behavior?')) { // TODO
+                if (confirm(messages.remove_behavior)) { 
                     methods['removeBehavior'].apply(self, [$newBehavior.data('behavior')]);
-                }
+                };
             });        
         },
         removeBehavior: function(behaviorData) {
@@ -80,8 +88,9 @@
                 methods['addBehavior'].apply(self, [this]);
             });
         },
-        openForm: function(dmBehaviorKey, action, data) {            
+        openForm: function(dmBehaviorKey, action, data, behaviorName) {            
             var self = $(this);
+            var title = (action == 'edit') ? messages.edit_behavior + ' ' + data.dmBehaviorName :  messages.add_behavior + ' ' + behaviorName;
             var dmBehaviorTempID = null;            
             if (data == undefined) data = {};
             else { // IT IS EDIT MODE
@@ -93,14 +102,13 @@
                 data = {
                     dmBehaviorData : data
                 };
-            };
-            
+            };            
             
             var $dialog = $.dm.ctrl.ajaxDialog({
                 url         :           $.dm.ctrl.getHref('+/dmBehaviorsFramework/form?dmBehaviorKey=' + dmBehaviorKey + '&dmBehaviorFormAction=' + action),
                 data        :           data,
                 type        :           'post',
-                title       :           'Add behavior ', // TODO translate
+                title       :           title,
                 width       :           600,
                 'class'     :           'dm_widget_edit_dialog_wrap ',
                 resizable   :           true,
@@ -153,16 +161,13 @@
                 return methods.init.apply( this, arguments );
             } else {
                 $.error( 'Method ' +  method + ' does not exist on jQuery.dmBehaviorsFormWidget' );
-            }       
+            };       
                 
         });
-    }
-    
+    };
     
     $('div.dm.dm_widget_edit_dialog_wrap').live('dmAjaxResponse', function() {
         var $widget = $( "div.dm_widget_form_behaviors_droppable", $(this)).dmBehaviorsFormWidget()
         $widget.dmBehaviorsFormWidget('unserializeBehaviors');        
     });
-    
-    
 })(jQuery);

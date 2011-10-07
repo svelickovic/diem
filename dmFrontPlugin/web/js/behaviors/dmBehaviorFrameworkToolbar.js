@@ -38,7 +38,7 @@
         else {
             $('.dm_add_behavior_menu').css('display', 'none');
             $('.dm_add_behavior').removeClass('active');
-        }
+        };
     });
     
     // Hover activation

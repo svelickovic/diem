@@ -27,6 +27,24 @@
 .front-form-renderer.two-columns-tabular table tr td.field.is_big {
     width: 75%;
 }
+
+.front-form-renderer.two-columns-tabular table tr td.field input,
+.front-form-renderer.two-columns-tabular table tr td.field select,
+.front-form-renderer.two-columns-tabular table tr td.field textarea {
+    width: 99%;
+}
+
+.front-form-renderer.two-columns-tabular table tr td.field.is_big input,
+.front-form-renderer.two-columns-tabular table tr td.field.is_big select,
+.front-form-renderer.two-columns-tabular table tr td.field.is_big textarea {
+    width: 99%;
+    text-align: right;
+}
+
+.front-form-renderer.two-columns-tabular table tr td.right {
+    text-align: right;
+}
+
 .front-form-renderer.two-columns-tabular .dm_section_help {
     text-align: center;
     padding-top: 10px;

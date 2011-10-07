@@ -83,10 +83,10 @@
                 <td class="field">
                     <?php if ($fields[$j]['type'] != 'empty') echo $form[$fields[$j]['name']]->render();?>
                 </td>
-                <td class="label">
+                <td class="label" style="padding-left: 15px;">
                     <?php if ($j+1<count($fields) && !$fields[$j+1]['is_big']) if ($fields[$j+1]['type'] != 'empty') echo $form[$fields[$j+1]['name']]->renderLabel(); ?>
                 </td>
-                <td class="field">
+                <td class="field right">
                     <?php if ($j+1<count($fields) && !$fields[$j+1]['is_big']) if ($fields[$j+1]['type'] != 'empty') echo $form[$fields[$j+1]['name']]->render(); ?>
                 </td>
             </tr>
