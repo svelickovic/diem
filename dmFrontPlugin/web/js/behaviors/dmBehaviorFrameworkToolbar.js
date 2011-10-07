@@ -19,12 +19,9 @@
                 $(this)[$(this).find('.dm_behavior_draggable_helper:visible').length ? 'show' : 'hide']();
             };
         });
-    });
-    
-    
-    
-    // Show / Hide menu    
-    // TODO how to hide when it is clicked somewhere else?
+    });   
+        
+    // Show / Hide menu        
     $('.dm_add_behavior').click(function(event){
         var position = $('.dm_add_behavior').closest('li').position();
         $('.dm_add_behavior_menu').css('left', position.left + 4 + 'px');        
@@ -35,7 +32,15 @@
             $('.dm_add_behavior_menu').css('display', 'block');             
             $(this).addClass('active');
         };
+    });    
+    $(document).click(function(e){
+        if ($(e.target).hasClass('dm_add_behavior') || $(e.target).hasClass('dm_add_behavior_menu') ||  $(e.target).closest('.dm_add_behavior_menu').length != 0 || $(e.target).closest('.dm_add_behavior').length != 0) return;
+        else {
+            $('.dm_add_behavior_menu').css('display', 'none');
+            $('.dm_add_behavior').removeClass('active');
+        }
     });
+    
     // Hover activation
     $('.dm_add_behavior_menu').find('.dm_behavior_draggable_helper').hover(function(){
         $(this).addClass('dm_behavior_draggable_hover');
